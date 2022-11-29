@@ -1784,15 +1784,10 @@
         return;
       }
 
-      const dimension = this._getDimension(); // eslint-disable-next-line no-console
+      const dimension = this._getDimension();
 
-
-      console.log(dimension); // eslint-disable-next-line no-console
-
-      console.log(this._element.getBoundingClientRect());
-      this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`; // eslint-disable-next-line no-console
-
-      console.log(this._element.style[dimension]);
+      reflow(this._element);
+      this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`;
       reflow(this._element);
 
       this._element.classList.add(CLASS_NAME_COLLAPSING);
