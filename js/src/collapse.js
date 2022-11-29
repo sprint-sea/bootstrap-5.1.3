@@ -196,7 +196,14 @@ class Collapse extends BaseComponent {
 
     const dimension = this._getDimension()
 
+    // eslint-disable-next-line no-console
+    console.log(dimension)
+    // eslint-disable-next-line no-console
+    console.log(this._element.getBoundingClientRect())
     this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`
+
+    // eslint-disable-next-line no-console
+    console.log(this._element.style[dimension])
 
     reflow(this._element)
 
