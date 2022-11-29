@@ -1,6 +1,6 @@
 /*!
   * Bootstrap v5.1.3 (https://getbootstrap.com/)
-  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 import * as Popper from '@popperjs/core';
@@ -1768,6 +1768,11 @@ class Collapse extends BaseComponent {
     this._queueCallback(complete, this._element, true);
 
     this._element.style[dimension] = `${this._element[scrollSize]}px`;
+  } // fixing collapse issue for angular when closing a collapse element
+
+
+  reflow(element) {
+    (element || element.body).getBoundingClientRect();
   }
 
   hide() {
@@ -1784,7 +1789,7 @@ class Collapse extends BaseComponent {
     const dimension = this._getDimension();
 
     this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`;
-    reflow(this._element);
+    this.reflow(this._element);
 
     this._element.classList.add(CLASS_NAME_COLLAPSING);
 
