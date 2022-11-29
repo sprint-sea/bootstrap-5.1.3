@@ -160,8 +160,7 @@
 
 
   const reflow = element => {
-    // eslint-disable-next-line no-unused-expressions
-    element.offsetHeight;
+    return (element || element.body).getBoundingClientRect();
   };
 
   const getjQuery = () => {

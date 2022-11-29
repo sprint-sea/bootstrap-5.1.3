@@ -199,8 +199,7 @@ const noop = () => {};
 
 
 const reflow = element => {
-  // eslint-disable-next-line no-unused-expressions
-  element.offsetHeight;
+  return (element || element.body).getBoundingClientRect();
 };
 
 const getjQuery = () => {
@@ -1768,11 +1767,6 @@ class Collapse extends BaseComponent {
     this._queueCallback(complete, this._element, true);
 
     this._element.style[dimension] = `${this._element[scrollSize]}px`;
-  } // fixing collapse issue for angular when closing a collapse element
-
-
-  reflow(element) {
-    (element || element.body).getBoundingClientRect();
   }
 
   hide() {
@@ -1789,7 +1783,7 @@ class Collapse extends BaseComponent {
     const dimension = this._getDimension();
 
     this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`;
-    this.reflow(this._element);
+    reflow(this._element);
 
     this._element.classList.add(CLASS_NAME_COLLAPSING);
 

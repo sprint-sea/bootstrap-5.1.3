@@ -8,6 +8,7 @@
 import {
   defineJQueryPlugin,
   getElement,
+  reflow,
   getSelectorFromElement,
   getElementFromSelector,
   typeCheckConfig
@@ -183,11 +184,6 @@ class Collapse extends BaseComponent {
     this._element.style[dimension] = `${this._element[scrollSize]}px`
   }
 
-  // fixing collapse issue for angular when closing a collapse element
-  reflow(element) {
-    (element || element.body).getBoundingClientRect()
-  }
-
   hide() {
     if (this._isTransitioning || !this._isShown()) {
       return
@@ -202,7 +198,7 @@ class Collapse extends BaseComponent {
 
     this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`
 
-    this.reflow(this._element)
+    reflow(this._element)
 
     this._element.classList.add(CLASS_NAME_COLLAPSING)
     this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW)

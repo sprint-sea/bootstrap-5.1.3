@@ -107,6 +107,19 @@
       }
     });
   };
+  /**
+   * Trick to restart an element's animation
+   *
+   * @param {HTMLElement} element
+   * @return void
+   *
+   * @see https://www.charistheo.io/blog/2021/02/restart-a-css-animation-with-javascript/#restarting-a-css-animation
+   */
+
+
+  const reflow = element => {
+    return (element || element.body).getBoundingClientRect();
+  };
 
   const getjQuery = () => {
     const {
@@ -321,11 +334,6 @@
       this._queueCallback(complete, this._element, true);
 
       this._element.style[dimension] = `${this._element[scrollSize]}px`;
-    } // fixing collapse issue for angular when closing a collapse element
-
-
-    reflow(element) {
-      (element || element.body).getBoundingClientRect();
     }
 
     hide() {
@@ -342,7 +350,7 @@
       const dimension = this._getDimension();
 
       this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`;
-      this.reflow(this._element);
+      reflow(this._element);
 
       this._element.classList.add(CLASS_NAME_COLLAPSING);
 
